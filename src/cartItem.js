@@ -1,5 +1,6 @@
 import React from "react";
 
+
 class CartItem extends React.Component {
 	// Adding state to the componets
 	constructor() {
@@ -10,6 +11,7 @@ class CartItem extends React.Component {
 			qty: 0,
 			img: "",
 		};
+
 	}
 
 	// increase Quantity 
@@ -28,7 +30,7 @@ class CartItem extends React.Component {
 		if (qty === 0) {
 			return;
 		}
-// render the the decrease the quantity using setState 
+		// render the the decrease the quantity using setState 
 		this.setState((prevState) => {
 			return {
 				qty: prevState.qty - 1,
