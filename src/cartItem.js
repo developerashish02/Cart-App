@@ -3,32 +3,8 @@ import React from "react";
 
 class CartItem extends React.Component {
 
-	// increase Quantity 
-	increaseQuantity = () => {
-		// render the the increse the quantity using setState 
-		this.setState((prevState) => {
-			return {
-				qty: prevState.qty + 1,
-			}
-		})
-	}
-
-	// decreaseQuantity 
-	decreaseQuantity = () => {
-		const { qty } = this.state;
-		if (qty === 0) {
-			return;
-		}
-		// render the the decrease the quantity using setState 
-		this.setState((prevState) => {
-			return {
-				qty: prevState.qty - 1,
-			}
-		})
-	}
 	render() {
-
-		console.log(this.props.products);
+		console.log(this.props);
 		const { price, title, qty } = this.props.products;
 		return (
 			<div className="cart-item">
@@ -45,7 +21,7 @@ class CartItem extends React.Component {
 							src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png "
 							alt="Add item "
 							className="action-icons "
-							onClick={this.increaseQuantity}
+							onClick={() => this.props.onIncreaseQuantity(this.props.products)}
 						/>
 
 						{/* decresase the quantity  */}
@@ -53,7 +29,7 @@ class CartItem extends React.Component {
 							alt="remove item"
 							className="action-icons"
 							src="https://cdn-icons-png.flaticon.com/512/1828/1828899.png"
-							onClick={this.decreaseQuantity}
+							onClick={() => this.props.onDecreaseQuantity(this.props.products)}
 						/>
 
 						{/* remove cart item   */}
