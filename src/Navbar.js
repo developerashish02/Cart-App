@@ -9,7 +9,7 @@ const Navbar = (props) => {
                     style={styles.cartIcon}
                 />
                 {/* Count of the cart items */}
-                <span style={styles.cartCount}>3</span>
+                <span style={styles.cartCount}>{props.count}</span>
             </div>
         </div>
     )
@@ -18,8 +18,9 @@ const Navbar = (props) => {
 
 const styles = {
     cartIcon: {
-        height: 32,
-        marginRight: 20
+        height: 42,
+        marginRight: 20,
+        top: 10
     },
     nav: {
         height: 70,
@@ -29,7 +30,8 @@ const styles = {
         alignItems: 'center'
     },
     cartIconContainer: {
-        position: 'relative'
+        position: 'relative',
+        right: 10
     },
     cartCount: {
         background: 'yellow',

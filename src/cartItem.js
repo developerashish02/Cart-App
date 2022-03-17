@@ -22,6 +22,7 @@ const CartItem = (props) => {
 						alt="Add item "
 						className="action-icons "
 						onClick={() => onIncreaseQuantity(products)}
+
 					/>
 
 					{/* decresase the quantity  */}
