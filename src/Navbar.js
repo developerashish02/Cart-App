@@ -3,6 +3,7 @@ const Navbar = (props) => {
     return (
         <div style={styles.nav}>
             <div style={styles.cartIconContainer}>
+
                 {/* Cart logo */}
                 <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png"
                     alt="nav-cart-icon"
@@ -15,7 +16,6 @@ const Navbar = (props) => {
     )
 
 }
-
 const styles = {
     cartIcon: {
         height: 42,
