@@ -9,24 +9,24 @@ class App extends React.Component {
 		this.state = {
 			products: [
 				{
-					price: 999,
-					title: "Mobail Phone",
+					price: 74900,
+					title: "Apple iPhone 13",
 					qty: 1,
-					img: 'https://images.unsplash.com/photo-1581795686346-b0f855c430e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bW9iYWlsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60',
+					img: 'https://m.media-amazon.com/images/I/71gm8v4uPBL._SX522_.jpg',
 					id: 1,
 				},
 				{
 					price: 499,
-					title: "Watch",
-					qty: 11,
-					img: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0Y2h8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60',
+					title: "Apple watch series 7",
+					qty: 1,
+					img: 'https://i.guim.co.uk/img/media/0a8586ac1723de4bcc878e30eb9dd6f970147457/206_408_4967_2981/master/4967.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1ffaa0730b7d432a59c2a7301f82a65f',
 					id: 2,
 				},
 				{
-					price: 1500,
-					title: "Laptop",
-					qty: 100,
-					img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60",
+					price: 64900,
+					title: "Apple i pad pro",
+					qty: 1,
+					img: "https://m.media-amazon.com/images/I/81Y5WuARqpS._AC_SX342_.jpg",
 					id: 3,
 				},
 			],
@@ -122,8 +122,8 @@ const style = {
 	total: {
 		fontSize: 25,
 		padding: 20,
-		background: 'cyan',
-		color: 'green',
+		background: 'black',
+		color: 'white',
 		height: 20,
 		
 	}
