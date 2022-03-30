@@ -2,35 +2,30 @@ import "./App.css";
 import Cart from "./cart";
 import Navbar from "./Navbar";
 import React from 'react'
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from "./firebase-config";
+
 class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			products: [],
-			loading:"true",
+			loading: "true",
 		};
 	}
-
-
-
 	// fetching data from firestore 
 	componentDidMount() {
-		const productCollectionRef = collection(db, 'products')
-		getDocs(productCollectionRef)
-			.then(snapshort => {
-				const prod = snapshort.docs.map((doc) => {
-					const data = doc.data()
-					data['id'] = doc.id
-					return data 
-				})
-				this.setState({
-					products: prod,
-					loading:false,
-				})
+		onSnapshot(collection(db, 'products'), (snapshort) => {
+			const prod = snapshort.docs.map((doc) => {
+				const data = doc.data()
+				data['id'] = doc.id
+				return data
 			})
-
+			this.setState({
+				products: prod,
+				loading: false,
+			})
+		})
 	}
 
 	// increse Quantity
@@ -97,7 +92,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { products , loading} = this.state;
+		const { products, loading } = this.state;
 		return (
 			<div className="App">
 				<Navbar count={this.getCartCount()} />
@@ -120,6 +115,7 @@ class App extends React.Component {
 
 }
 
+// style added for footer 
 const style = {
 	total: {
 		fontSize: 25,
@@ -127,8 +123,8 @@ const style = {
 		background: 'black',
 		color: 'white',
 		height: 20,
-
 	}
 }
 
 export default App;
+
