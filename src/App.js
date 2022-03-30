@@ -2,7 +2,7 @@ import "./App.css";
 import Cart from "./cart";
 import Navbar from "./Navbar";
 import React from 'react'
-import { collection, getDocs, onSnapshot, addDoc, doc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from "./firebase-config";
 
 class App extends React.Component {
@@ -28,7 +28,6 @@ class App extends React.Component {
 		})
 	}
 
-
 	// increse Quantity
 	handleIncreaseQuantity = (product) => {
 		const { products } = this.state;
@@ -38,9 +37,6 @@ class App extends React.Component {
 		updateDoc(docRef, {
 			qty: products[index].qty + 1,
 		})
-			.then(responce => {
-				console.log("updated scucess");
-			})
 	}
 
 	// decrease Quantity
@@ -52,22 +48,21 @@ class App extends React.Component {
 			return;
 		}
 
-		products[index].qty -= 1;
-		// set state
-		this.setState({
-			products: products,
-		});
+		const docRef = doc(db, 'products', products[index].id);
+		updateDoc(docRef, {
+			qty: products[index].qty - 1,
+		})
+
 	};
 
 	// handleDeleteProduct
 	handleDeleteProduct = (id) => {
 		const { products } = this.state;
-		const items = products.filter((item) => item.id !== id);
-		// return the [] contain {}
-		this.setState({
-			products: items,
-		});
-
+		const docRef = doc(db, 'products', id)
+		deleteDoc(docRef)
+			.then(() => {
+				console.log("delete sucess");
+			})
 	};
 
 	// count total quantity 
