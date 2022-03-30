@@ -2,7 +2,7 @@ import "./App.css";
 import Cart from "./cart";
 import Navbar from "./Navbar";
 import React from 'react'
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, addDoc } from 'firebase/firestore';
 import { db } from "./firebase-config";
 
 class App extends React.Component {
@@ -27,6 +27,7 @@ class App extends React.Component {
 			})
 		})
 	}
+
 
 	// increse Quantity
 	handleIncreaseQuantity = (product) => {
@@ -91,6 +92,24 @@ class App extends React.Component {
 		return Carttotal;
 	}
 
+	// handle Add 
+	handleAddCart = () => {
+		const addCollection = collection(db, 'products')
+		addDoc(addCollection, {
+			img: '',
+			price: 29999,
+			qty: 5,
+			title: "key board",
+		})
+
+			.then(responce => {
+				console.log(responce);
+			})
+			.catch((error) => {
+				alert("Product not be added")
+			})
+	}
+
 	render() {
 		const { products, loading } = this.state;
 		return (
@@ -104,10 +123,18 @@ class App extends React.Component {
 				/>
 
 				{loading && <h1>Loading Product...</h1>}
+				{/* Add product */}
+				<button
+					onClick={this.handleAddCart}
+					style={{
+						padding: 15, fontSize: 20, backgroundColor: " #555555", color: 'white',
+						margin: 15
+					}}
+				>Add Product</button>
 
 				{/* Total price */}
 				<div style={style.total}>
-					Total:{this.getCartTotal()}
+					Total Price : {this.getCartTotal()}
 				</div>
 			</div>
 		);
