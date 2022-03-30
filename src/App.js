@@ -2,7 +2,7 @@ import "./App.css";
 import Cart from "./cart";
 import Navbar from "./Navbar";
 import React from 'react'
-import { collection, getDocs, onSnapshot, addDoc } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from "./firebase-config";
 
 class App extends React.Component {
@@ -34,12 +34,14 @@ class App extends React.Component {
 		const { products } = this.state;
 		const index = products.indexOf(product);
 
-		products[index].qty += 1;
-		// set state
-		this.setState({
-			products: products,
-		});
-	};
+		const docRef = doc(db, 'products', products[index].id)
+		updateDoc(docRef, {
+			qty: products[index].qty + 1,
+		})
+			.then(responce => {
+				console.log("updated scucess");
+			})
+	}
 
 	// decrease Quantity
 	handleDecreaseQuantity = (product) => {
