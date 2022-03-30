@@ -2,35 +2,35 @@ import "./App.css";
 import Cart from "./cart";
 import Navbar from "./Navbar";
 import React from 'react'
-
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from "./firebase-config";
 class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			products: [
-				{
-					price: 74900,
-					title: "Apple iPhone 13",
-					qty: 1,
-					img: 'https://m.media-amazon.com/images/I/71gm8v4uPBL._SX522_.jpg',
-					id: 1,
-				},
-				{
-					price: 499,
-					title: "Apple watch series 7",
-					qty: 1,
-					img: 'https://i.guim.co.uk/img/media/0a8586ac1723de4bcc878e30eb9dd6f970147457/206_408_4967_2981/master/4967.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1ffaa0730b7d432a59c2a7301f82a65f',
-					id: 2,
-				},
-				{
-					price: 64900,
-					title: "Apple i pad pro",
-					qty: 1,
-					img: "https://m.media-amazon.com/images/I/81Y5WuARqpS._AC_SX342_.jpg",
-					id: 3,
-				},
-			],
+			products: [],
+			loading:"true",
 		};
+	}
+
+
+
+	// fetching data from firestore 
+	componentDidMount() {
+		const productCollectionRef = collection(db, 'products')
+		getDocs(productCollectionRef)
+			.then(snapshort => {
+				const prod = snapshort.docs.map((doc) => {
+					const data = doc.data()
+					data['id'] = doc.id
+					return data 
+				})
+				this.setState({
+					products: prod,
+					loading:false,
+				})
+			})
+
 	}
 
 	// increse Quantity
@@ -97,7 +97,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { products } = this.state;
+		const { products , loading} = this.state;
 		return (
 			<div className="App">
 				<Navbar count={this.getCartCount()} />
@@ -107,6 +107,8 @@ class App extends React.Component {
 					onDecreaseQuantity={this.handleDecreaseQuantity}
 					onDeleteItem={this.handleDeleteProduct}
 				/>
+
+				{loading && <h1>Loading Product...</h1>}
 
 				{/* Total price */}
 				<div style={style.total}>
@@ -125,7 +127,7 @@ const style = {
 		background: 'black',
 		color: 'white',
 		height: 20,
-		
+
 	}
 }
 
