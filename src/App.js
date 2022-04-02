@@ -120,14 +120,6 @@ class App extends React.Component {
 				/>
 
 				{loading && <h1>Loading Product...</h1>}
-				{/* Add product */}
-				<button
-					onClick={this.handleAddCart}
-					style={{
-						padding: 15, fontSize: 20, backgroundColor: " #555555", color: 'white',
-						margin: 15
-					}}
-				>Add Product</button>
 
 				{/* Total price */}
 				<div style={style.total}>
